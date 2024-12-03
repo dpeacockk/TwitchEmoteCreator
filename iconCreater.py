@@ -19,30 +19,24 @@ def resize_and_save(image_path, output_path, size):
 
 def move_to_original_pictures(image_path):
     original_folder = os.path.join(output_folder, 'OriginalPictures')
-    
     if not os.path.exists(original_folder):
         os.makedirs(original_folder)
-
     shutil.move(image_path, os.path.join(original_folder, os.path.basename(image_path)))
     print(f"Moved {image_path} to {original_folder}")
 
 def process_images():
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
-
     for folder in sizes.keys():
         size_folder = os.path.join(output_folder, folder)
         if not os.path.exists(size_folder):
             os.makedirs(size_folder)
-
     original_folder = os.path.join(output_folder, 'OriginalPictures')
     if not os.path.exists(original_folder):
         os.makedirs(original_folder)
-
     for file_name in os.listdir(input_folder):
         input_image_path = os.path.join(input_folder, file_name)
-
-        if not os.path.isfile(input_image_path) or not file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+        if not os.path.isfile(input_image_path) or not file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.webp')):
             continue
 
         for folder, size in sizes.items():
